@@ -1342,3 +1342,24 @@ pre {
   border-color: #ff9800;
   background: rgba(255, 152, 0, 0.15);
 }
+
+.custom-menu-input-controls {
+  display: flex;
+  gap: 0.5em;
+  width: 100%;
+}
+
+.custom-menu-input-controls input {
+  flex: 1;
+  min-width: 0;
+}
+
+.custom-menu-input-submit {
+  background: var(--accent-color);
+  border: 0;
+  border-radius: var(--border-radius);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  padding: 0.45em 0.8em;
+}

@@ -116,6 +116,21 @@ A text input field (since v2.3.0):
 }
 ```
 
+Set `submitButton` to render an explicit submit button instead of sending the
+input value when it loses focus. The Enter key also submits the value; empty or
+unchanged values are ignored.
+
+```json
+{
+  "id": "video-url",
+  "type": "input",
+  "text": "Paste a video URL",
+  "submitButton": "Play",
+  "action": "NOTIFICATION",
+  "content": { "notification": "YOUTUBE_PLAY_URL" }
+}
+```
+
 ## Actions
 
 ### Built-in Actions

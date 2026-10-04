@@ -955,29 +955,52 @@ function registerMenuElementBuilders (remote) {
 
     createInputElement (content, menu) {
 
+      const controls = document.createElement("div");
+      controls.className = "custom-menu-input-controls";
+
       const input = document.createElement("input");
       input.id = `${content.id}-input`;
       input.className = `${menu}-menu medium`;
       input.type = "text";
       input.placeholder = content.text;
 
-      input.addEventListener(
-        "focusout",
-        () => {
-
-          this.action(content.action.toUpperCase(), {
-            ...content.content,
-            "payload": {
-              ...content.content !== undefined && (typeof content.content.payload === "string" ? {string: content.content.payload} : content.content.payload),
-              "value": input.value
-            },
-            "value": input.value
-          });
-
+      let lastSubmittedValue = "";
+      const submit = () => {
+        const value = input.value.trim();
+        if (value === "" || value === lastSubmittedValue) {
+          return;
         }
-      );
 
-      return input;
+        lastSubmittedValue = value;
+        this.action(content.action.toUpperCase(), {
+          ...content.content,
+          "payload": {
+            ...content.content !== undefined && (typeof content.content.payload === "string" ? {string: content.content.payload} : content.content.payload),
+            "value": value
+          },
+          "value": value
+        });
+      };
+
+      if (content.submitButton) {
+        const button = document.createElement("button");
+        button.className = "custom-menu-input-submit";
+        button.type = "button";
+        button.textContent = content.submitButton;
+        button.addEventListener("click", submit);
+        input.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            submit();
+          }
+        });
+        controls.append(input, button);
+      } else {
+        input.addEventListener("focusout", submit);
+        controls.append(input);
+      }
+
+      return controls;
 
     },
 
@@ -1111,10 +1134,11 @@ function registerMenuElementAssembly (remote) {
 
         case "input":
 
-          return this.createInputElement(
+          item.append(this.createInputElement(
             content,
             menu
-          );
+          ));
+          break;
 
 
         default:
