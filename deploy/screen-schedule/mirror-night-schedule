@@ -1,0 +1,36 @@
+#!/usr/bin/python3
+"""Apply the saved daily screen-off interval in system local time."""
+import datetime
+import os
+import json
+from pathlib import Path
+import subprocess
+import time
+
+
+def display_action(minute, off, on):
+    asleep = off <= minute < on if off < on else minute >= off or minute < on
+    return '--off' if asleep else '--on'
+
+def minutes(value):
+    h, m = map(int, value.split(':'))
+    return h * 60 + m
+
+
+def main():
+    socket = Path(os.environ['XDG_RUNTIME_DIR']) / os.environ.get('WAYLAND_DISPLAY', 'wayland-0')
+    for _ in range(120):
+        if socket.exists():
+            break
+        time.sleep(1)
+    else:
+        raise SystemExit('Wayland display not available')
+    now = datetime.datetime.now().astimezone()
+    settings = json.loads(Path('/home/rondo/MagicMirror/config/screen-schedule.json').read_text())
+    action = display_action(now.hour*60+now.minute, minutes(settings['off']), minutes(settings['on']))
+    subprocess.run(['/usr/bin/wlopm', action, '*'], check=True, timeout=15)
+    print(f'{now.isoformat()}: display {action[2:]}', flush=True)
+
+
+if __name__ == '__main__':
+    main()

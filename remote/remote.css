@@ -1363,3 +1363,15 @@ pre {
   font: inherit;
   padding: 0.45em 0.8em;
 }
+
+/* Daily screen schedule in the Display menu. */
+.screen-schedule-card { flex-wrap: wrap; cursor: default; }
+.screen-schedule-form { width: 100%; box-sizing: border-box; padding: 16px 0 0; display: grid; gap: 14px; text-align: left; }
+.screen-schedule-form label { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.screen-schedule-form input[type="time"] { color-scheme: dark; box-sizing: border-box; width: 155px; min-height: 44px; border: 1px solid #666; border-radius: 8px; padding: 8px; background: #171717; color: #fff; font: inherit; }
+.screen-schedule-form button { min-height: 44px; border: 1px solid #666; border-radius: 8px; padding: 10px 14px; background: #333; color: #fff; font: inherit; cursor: pointer; }
+.screen-schedule-form button:disabled { opacity: .5; cursor: wait; }
+.screen-schedule-form button[hidden] { display: none; }
+.screen-schedule-form p { margin: 0; font-size: 15px; line-height: 1.5; white-space: normal; }
+.screen-schedule-note { color: #bbb; }
+.screen-schedule-form :focus-visible { outline: 2px solid #8ab4f8; outline-offset: 3px; }

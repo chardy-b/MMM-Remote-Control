@@ -1,3 +1,4 @@
+import {createScreenSchedule} from "./screen-schedule.mjs";
 import {MENU_SIDE_EFFECTS} from "./remote-menu-routing.mjs";
 import {Remote} from "./remote.mjs";
 
@@ -1112,6 +1113,11 @@ function registerMenuElementAssembly (remote) {
 
       let nestedNav;
       switch (content.type) {
+        case "screen-schedule":
+          item.classList.add("screen-schedule-card");
+          item.append(createScreenSchedule());
+          break;
+
 
         case "menu":
 

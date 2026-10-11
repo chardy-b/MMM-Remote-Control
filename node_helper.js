@@ -123,6 +123,7 @@ module.exports = NodeHelper.create({
   },
 
   createRoutes () {
+    require("./lib/screenSchedule.js").register(this.expressApp);
     this.expressApp.get("/remote-service-worker.js", (request, response) => {
       response.set("Cache-Control", "no-cache");
       response.contentType("application/javascript");

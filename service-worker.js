@@ -1,6 +1,7 @@
-const CACHE_NAME = "mmm-remote-control-v6.0.0";
+const CACHE_NAME = "mmm-remote-control-v6.0.0-screen-schedule-1";
 const urlsToCache = [
   "./remote.html",
+  "./modules/MMM-Remote-Control/remote/screen-schedule.mjs",
   "./css/main.css",
   "./css/roboto.css",
   "./css/font-awesome.css",
