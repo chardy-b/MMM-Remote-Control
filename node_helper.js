@@ -1015,6 +1015,14 @@ module.exports = NodeHelper.create({
       return;
     }
 
+    // An array in the custom menu file adds one main-menu button per menu
+    if (Array.isArray(customMenu)) {
+      for (const menu of customMenu) {
+        this.sendSocketNotification("REMOTE_CLIENT_CUSTOM_MENU", menu);
+      }
+      return;
+    }
+
     this.customMenu = {...this.customMenu, ...customMenu};
     this.sendSocketNotification("REMOTE_CLIENT_CUSTOM_MENU", this.customMenu);
   },

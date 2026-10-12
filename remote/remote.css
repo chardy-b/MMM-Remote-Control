@@ -1343,18 +1343,28 @@ pre {
   background: rgba(255, 152, 0, 0.15);
 }
 
+/* Put the input + submit button on their own full-width line under the label */
+.button:has(> .custom-menu-input-controls) {
+  flex-wrap: wrap;
+}
+
 .custom-menu-input-controls {
   display: flex;
+  flex: 1 1 100%;
   gap: 0.5em;
+  margin-top: var(--spacing-sm);
+  min-width: 0; /* let the row shrink below the input's intrinsic width on phones */
   width: 100%;
 }
 
 .custom-menu-input-controls input {
   flex: 1;
   min-width: 0;
+  width: 100%;
 }
 
 .custom-menu-input-submit {
+  flex: none;
   background: var(--accent-color);
   border: 0;
   border-radius: var(--border-radius);
@@ -1363,7 +1373,6 @@ pre {
   font: inherit;
   padding: 0.45em 0.8em;
 }
-
 /* Daily screen schedule in the Display menu. */
 .screen-schedule-card { flex-wrap: wrap; cursor: default; }
 .screen-schedule-form { width: 100%; box-sizing: border-box; padding: 16px 0 0; display: grid; gap: 14px; text-align: left; }
